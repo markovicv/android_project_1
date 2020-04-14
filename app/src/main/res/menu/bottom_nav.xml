@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/stateId"
+        android:icon="@drawable/ic_info"
+        android:title="stanje"
+        />
+
+    <item
+        android:id="@+id/unosId"
+        android:icon="@drawable/ic_person_add"
+        android:title="unos"
+        />
+    <item
+        android:id="@+id/listId"
+        android:icon="@drawable/ic_format_list"
+        android:title="liste"
+        />
+    <item
+        android:id="@+id/profilId"
+        android:icon="@drawable/ic_person_pin"
+        android:title="profil"
+        />
+
+</menu>

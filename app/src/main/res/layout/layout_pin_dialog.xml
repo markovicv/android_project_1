@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/pinET"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="unesite pin"/>
+    <Button
+        android:layout_below="@+id/pinET"
+        android:id="@+id/potvrdiBtn"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_height="wrap_content"
+        android:text="potvrdi"/>
+
+    <Button
+        android:layout_below="@+id/pinET"
+        android:layout_toRightOf="@+id/potvrdiBtn"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/odustaniBtn"
+        android:layout_height="wrap_content"
+        android:text="odustani"/>
+
+
+
+</RelativeLayout>
