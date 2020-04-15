@@ -12,3 +12,11 @@
 /captures
 .externalNativeBuild
 .cxx
+*.apk
+*.ap_
+*.class
+bin/
+gen/
+out/
+.gradle/
+build/

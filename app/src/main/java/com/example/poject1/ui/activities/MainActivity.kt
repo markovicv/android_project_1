@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity(){
                 R.id.unosId->{
                     viewPager.setCurrentItem(com.example.poject1.ui.adapter.PagerAdapter.FRAGMENT_2,false)
                 }
+                R.id.profilId->{
+                    viewPager.setCurrentItem(com.example.poject1.ui.adapter.PagerAdapter.FRAGMENT_4,false)
+
+                }
 
             }
             true

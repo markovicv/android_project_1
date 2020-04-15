@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val editor = getSharedPreferences(packageName, Context.MODE_PRIVATE).edit()
+        val editor = getSharedPreferences(Konstants.MEDICAL_PREFERENCE, Context.MODE_PRIVATE).edit()
         var myPin:Int = -1
 
         pinBtn.setOnClickListener {

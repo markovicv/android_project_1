@@ -32,7 +32,7 @@
         app:srcCompat="@drawable/ic_person_green" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/patientNameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.112" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/patientSurnameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -60,11 +60,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/patientNameET"
         app:layout_constraintVertical_bias="0.066" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/patientSimptomsET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -76,11 +76,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/patientSurnameET"
         app:layout_constraintVertical_bias="0.06" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAddWaitingRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -88,6 +88,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/patientSimptomsET"
         app:layout_constraintVertical_bias="0.577" />
 </androidx.constraintlayout.widget.ConstraintLayout>

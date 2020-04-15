@@ -15,7 +15,7 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activty_splash)
 
-        val sharedPreference = getSharedPreferences(packageName, Context.MODE_PRIVATE)
+        val sharedPreference = getSharedPreferences(Konstants.MEDICAL_PREFERENCE, Context.MODE_PRIVATE)
        // sharedPreference.edit().clear().apply()
         val name = sharedPreference.getString("name",null)
         val surname = sharedPreference.getString("surname",null)
