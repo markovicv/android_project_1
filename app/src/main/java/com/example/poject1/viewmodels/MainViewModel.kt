@@ -9,23 +9,127 @@ class MainViewModel :ViewModel(){
     private val waitingPatients: MutableLiveData<List<Patient>> = MutableLiveData()
     private val waitingPatientsList:MutableList<Patient> = mutableListOf()
 
-    private val patientsInWaitingRoom:MutableLiveData<Int> = MutableLiveData()
+    private val releasedPatientsList:MutableList<Patient> = mutableListOf()
+    private val releasedPatients:MutableLiveData<List<Patient>> = MutableLiveData()
+
+    private val hsopitalizedPatientsList:MutableList<Patient> = mutableListOf()
+    private val hospitalizedPatients:MutableLiveData<List<Patient>> = MutableLiveData()
+
+    private val patientsInWaitingRoomNumber:MutableLiveData<Int> = MutableLiveData()
+    private val patientHospitalizedNumber :MutableLiveData<Int> = MutableLiveData()
+    private val patientsReleasedNumber :MutableLiveData<Int> = MutableLiveData()
 
     init{
-        patientsInWaitingRoom.value = 0
+        patientsInWaitingRoomNumber.value = 0
+        patientHospitalizedNumber.value=0
+        patientsReleasedNumber.value = 0
+
     }
 
-    fun getPatientsInWaitingRoom():LiveData<Int>{
-        return patientsInWaitingRoom
+    fun getNumberOfPatientsInWaitingRoom():LiveData<Int>{
+        return patientsInWaitingRoomNumber
     }
+    fun getReleasedPatientsNumber():LiveData<Int>{
+        return patientsReleasedNumber
+    }
+    fun getHospitalizedPatientsNumber():LiveData<Int>{
+        return patientHospitalizedNumber
+    }
+    fun getPatientsInWaitingRoom():LiveData<List<Patient>>{
+        return waitingPatients
+    }
+    fun getReleasedPatients():LiveData<List<Patient>>{
+        return releasedPatients
+    }
+    fun getHospitalizedPatients():LiveData<List<Patient>>{
+        return hospitalizedPatients
+    }
+
     fun increasePatientsInWaitingRoom(){
-        var patients:Int? = patientsInWaitingRoom.value
+        var patients:Int? = patientsInWaitingRoomNumber.value
         patients = patients?.plus(1)
-        patientsInWaitingRoom.value = patients
+        patientsInWaitingRoomNumber.value = patients
     }
+    fun decreasePatientsInWaitingRoom(){
+        var patients:Int? = patientsInWaitingRoomNumber.value
+        patients = patients?.minus(1)
+        patientsInWaitingRoomNumber.value = patients
+    }
+    fun increasePatientsReleased(){
+        var patients:Int? = patientsReleasedNumber.value
+        patients = patients?.plus(1)
+        patientsReleasedNumber.value = patients
+    }
+    fun increasePatientsHospitalized(){
+        var patients:Int? = patientHospitalizedNumber.value
+        patients = patients?.plus(1)
+        patientHospitalizedNumber.value = patients
+    }
+    fun decreasePatientsHospitalized(){
+        var patients:Int? = patientHospitalizedNumber.value
+        patients = patients?.minus(1)
+        patientHospitalizedNumber.value = patients
+    }
+
+
+
     fun addPatientsToWaiting(patient: Patient){
         waitingPatientsList.add(patient)
         waitingPatients.value = waitingPatientsList
+    }
+
+    fun addPatientsToReleased(patient:Patient){
+        releasedPatientsList.add(patient)
+        hsopitalizedPatientsList.remove(patient)
+        decreasePatientsHospitalized()
+        increasePatientsReleased()
+        hospitalizedPatients.value = hsopitalizedPatientsList
+        releasedPatients.value = releasedPatientsList
+    }
+    fun addPatientsToHospitalized(patient: Patient){
+        hsopitalizedPatientsList.add(patient)
+        waitingPatientsList.remove(patient)
+        decreasePatientsInWaitingRoom()
+        increasePatientsHospitalized()
+        waitingPatients.value = waitingPatientsList
+        hospitalizedPatients.value = hsopitalizedPatientsList
+
+    }
+    fun remowePatientFromWaiting(patient: Patient){
+        waitingPatientsList.remove(patient)
+        decreasePatientsInWaitingRoom()
+        waitingPatients.value = waitingPatientsList
+    }
+
+    fun findWaitingPatients(key:String){
+        val filterdList = waitingPatientsList.filter {
+            it.name.toLowerCase().startsWith(key) || it.surname.toLowerCase().startsWith(key)
+        }
+        waitingPatients.value = filterdList
+    }
+    fun findHospitalizedPatients(key:String){
+        val filterdList = hsopitalizedPatientsList.filter {
+            it.name.toLowerCase().startsWith(key) || it.surname.toLowerCase().startsWith(key)
+        }
+        hospitalizedPatients.value = filterdList
+
+    }
+    fun findReleasedPatients(key:String){
+        val filterdList = releasedPatientsList.filter {
+            it.name.toLowerCase().startsWith(key) || it.surname.toLowerCase().startsWith(key)
+        }
+        releasedPatients.value = filterdList
+
+    }
+    fun updateRecord(patient: Patient){
+        for(i in 0 until hsopitalizedPatientsList.size){
+            if(hsopitalizedPatientsList.get(i).id == patient.id){
+                hsopitalizedPatientsList.removeAt(i)
+                hsopitalizedPatientsList.add(i,patient)
+            }
+        }
+
+        hospitalizedPatients.value = hsopitalizedPatientsList
     }
 
 

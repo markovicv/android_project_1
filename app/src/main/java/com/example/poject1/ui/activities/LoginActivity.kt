@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             myCustomDialog.potvrdiBtn.setOnClickListener{
                 val pinTyped:String = myCustomDialog.pinET.text.toString()
                 if(pinTyped==""){
-                    Toast.makeText(this,"Niste uneli pin",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,this.resources.getString(R.string.PIN),Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 myPin = Integer.parseInt(pinTyped)
@@ -52,18 +52,18 @@ class LoginActivity : AppCompatActivity() {
             val hospital = hospitalET.text.toString()
 
             if(name =="" || surname=="" || hospital==""){
-                Toast.makeText(this,"Niste lepo uneli podatke o vama",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,this.resources.getString(R.string.MED_WORKER_PODACI),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(myPin!=Konstants.LOGIN_PIN){
-                Toast.makeText(this,"PIN nije lepo unet",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,this.resources.getString(R.string.PIN),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            editor.putString("name",name)
-            editor.putString("surname",surname)
-            editor.putString("hospital",hospital)
-            editor.putInt("PIN",myPin)
+            editor.putString(Konstants.EDITOR_NAME,name)
+            editor.putString(Konstants.EDITOR_SURNAME,surname)
+            editor.putString(Konstants.EDITOR_HOSPITAL,hospital)
+            editor.putInt(Konstants.EDITOR_PIN,myPin)
             editor.apply()
             val medicalWorker = MedicalWorker(name,surname,hospital,myPin)
             val intent = Intent(this,MainActivity::class.java)

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.example.poject1.Konstants
 import com.example.poject1.R
 import com.example.poject1.model.MedicalWorker
+import com.example.poject1.ui.activities.EditProfileActivity
 import com.example.poject1.ui.activities.LoginActivity
 import com.example.poject1.viewmodels.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -22,21 +23,24 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val medicalWorker:MedicalWorker = activity?.intent?.getParcelableExtra(Konstants.MED_PERSON) as MedicalWorker
 
-        medicalWorker.let {
-            profileViewModel.setMedicalWorker(it)
-        }
-        profileViewModel.getMedicalWorker().observe(viewLifecycleOwner, Observer {
-            medWorkerNameTv.text = it.name
-            medWorkerSurnameTv.text = it.surname
-            medworkerJobTv.text = it.hospital
-        })
+        val medicalWorker = activity?.intent?.getParcelableExtra(Konstants.MED_PERSON) as MedicalWorker
+        medWorkerNameTv.text = medicalWorker.name
+        medWorkerSurnameTv.text = medicalWorker.surname
+        medworkerJobTv.text = medicalWorker.hospital
+
+
+
         odjavaMedBtn.setOnClickListener {
             val editor = activity?.getSharedPreferences(Konstants.MEDICAL_PREFERENCE,Context.MODE_PRIVATE)?.edit()
             editor?.clear()
             editor?.apply()
             val intent:Intent = Intent(activity,LoginActivity::class.java)
+            startActivity(intent)
+        }
+        izmeniMedBtn.setOnClickListener {
+            val intent = Intent(activity,EditProfileActivity::class.java)
+            intent.putExtra(Konstants.MED_PERSON,medicalWorker)
             startActivity(intent)
         }
 

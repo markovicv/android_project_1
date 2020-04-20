@@ -1,3 +1,18 @@
-<resources>
+ <resources>
     <string name="app_name">Poject1</string>
+     <string name="PIN"> Niste uneli lepo pin</string>
+     <string name="MED_WORKER_PODACI"> Niste lepo uneli podatke o sebi</string>
+     <string name="IME_LOSE_UNESENO"> Ime niste uneli</string>
+     <string name="PREZIME_LOSE_UNESENO"> Prezime niste uneli</string>
+     <string name="BOLNICA_LOSE_UNESENO"> Bolnica niste uneli</string>
+
+     <string name="TAG_1"> waiting </string>
+     <string name="TAG_2"> hospitalized </string>
+     <string name="TAG_3"> released </string>
+     <string name="LOGIN_WORKER_ACTIVITY">Informacioni sistem za \n pracenje stanja \n pacijenata obolelih od \n COVID -19</string>
+
+     <string name="EDIT_PROFILE_MED_WORKER">Podaci o zdravstvenom radniku</string>
+     <string name="PATIENT_ACTIVITY">Karton pacijenta</string>
+     <string name="NEW_PATIENT">Unos noovog pacijenta</string>
+
 </resources>

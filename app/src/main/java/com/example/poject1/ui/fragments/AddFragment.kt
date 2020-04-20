@@ -18,6 +18,9 @@ import java.util.concurrent.ThreadLocalRandom
 class AddFragment : Fragment(R.layout.fragment_add) {
 
     private val sharedMainViewModel: MainViewModel by activityViewModels()
+    companion object{
+        var idCounter = 0
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,25 +32,26 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             var surname = patientSurnameET.text.toString()
 
             if(name==""){
-                patientNameET.setError("Niste uneli ime")
+                patientNameET.setError(this.resources.getString(R.string.IME_LOSE_UNESENO))
                 return@setOnClickListener
             }
             else if(surname==""){
-                patientSurnameET.setError("Niste uneli prezime")
+                patientSurnameET.setError(this.resources.getString(R.string.PREZIME_LOSE_UNESENO))
                 return@setOnClickListener
 
             }
             else if(simptoms==""){
-                patientSimptomsET.setError("Niste uneli simptome")
+                patientSimptomsET.setError(this.resources.getString(R.string.BOLNICA_LOSE_UNESENO))
                 return@setOnClickListener
             }
 
-            val id:Int = ThreadLocalRandom.current().nextInt(10000)
+
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             val formatted = current.format(formatter)
             val patient = Patient(name,surname,simptoms,formatted)
-            patient.id = id
+            patient.id = AddFragment.idCounter
+            AddFragment.idCounter++
 
             patientSimptomsET.text.clear()
             patientNameET.text.clear()

@@ -16,8 +16,14 @@ class StateFragment : Fragment(R.layout.fragment_state) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedMainViewModel.getPatientsInWaitingRoom().observe(viewLifecycleOwner, Observer {
+        sharedMainViewModel.getNumberOfPatientsInWaitingRoom().observe(viewLifecycleOwner, Observer {
             waitingRoomId.setText(it.toString())
+        })
+        sharedMainViewModel.getReleasedPatientsNumber().observe(viewLifecycleOwner, Observer {
+            dismissedId.setText(it.toString())
+        })
+        sharedMainViewModel.getHospitalizedPatientsNumber().observe(viewLifecycleOwner, Observer {
+            hospitalizedId.setText(it.toString())
         })
     }
 

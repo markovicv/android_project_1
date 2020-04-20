@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.poject1.ui.fragments.AddFragment
+import com.example.poject1.ui.fragments.ListFragment
 import com.example.poject1.ui.fragments.ProfileFragment
 import com.example.poject1.ui.fragments.StateFragment
 
@@ -22,8 +23,8 @@ class PagerAdapter(fragmentManager: FragmentManager):FragmentPagerAdapter(fragme
         return when(position) {
             FRAGMENT_1 -> StateFragment()
             FRAGMENT_2 -> AddFragment()
-            FRAGMENT_4 -> ProfileFragment()
-            else -> AddFragment()
+            FRAGMENT_3-> ListFragment()
+            else->ProfileFragment()
         }
     }
 

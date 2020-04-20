@@ -25,7 +25,7 @@
         android:layout_marginTop="24dp"
         android:lines="2"
         android:singleLine="false"
-        android:text="Informacioni sistem za \n pracenje stanja \n pacijenata obolelih od \n COVID -19 "
+        android:text="@string/LOGIN_WORKER_ACTIVITY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

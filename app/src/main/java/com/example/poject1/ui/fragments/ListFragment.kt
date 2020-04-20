@@ -1,17 +1,20 @@
 package com.example.poject1.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.poject1.R
+import com.example.poject1.ui.adapter.TabsAdapter
+import kotlinx.android.synthetic.main.fragment_list.*
 
-class ListFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+class ListFragment : Fragment(R.layout.fragment_list) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        tabPager.adapter = TabsAdapter(childFragmentManager)
+        tabLayout.setupWithViewPager(tabPager)
+
+
     }
 }
