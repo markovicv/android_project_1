@@ -2,15 +2,17 @@ package com.example.poject1.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.poject1.R
 import com.example.poject1.listeners.OnRecordBtnClick
 import com.example.poject1.listeners.OnReleaseBtnClick
 import com.example.poject1.model.Patient
+import com.example.poject1.ui.diff.PatientDiffCallBack
 import com.example.poject1.ui.viewholder.HospitalizedViewHolder
 
 class HospitalizedAdapter(val onReleaseBtnClick: OnReleaseBtnClick,val onRecordBtnClick: OnRecordBtnClick) : RecyclerView.Adapter<HospitalizedViewHolder>() {
-    private var hospitalizedPatients:List<Patient> = ArrayList<Patient>()
+    private var hospitalizedPatients = mutableListOf<Patient>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HospitalizedViewHolder {
@@ -26,7 +28,12 @@ class HospitalizedAdapter(val onReleaseBtnClick: OnReleaseBtnClick,val onRecordB
     }
 
     fun setHospitalizedPatients(newList:List<Patient>){
-        this.hospitalizedPatients = newList
-        notifyDataSetChanged()
+
+        val diffCallBack = PatientDiffCallBack(hospitalizedPatients,newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallBack)
+        hospitalizedPatients.clear()
+        hospitalizedPatients.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
+
     }
 }

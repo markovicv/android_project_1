@@ -39,6 +39,9 @@ class PatientActivity :AppCompatActivity() {
 
 
         }
+        patientOdustaniBtn.setOnClickListener {
+            onBackPressed()
+        }
 
 
     }

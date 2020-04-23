@@ -27,19 +27,19 @@ class SplashScreenActivity : AppCompatActivity() {
         if(name==null || surname == null || hospital == null || pin == -1){
             isLoged = false
         }
-        Handler().postDelayed({
-            lateinit var intent: Intent
-            if(isLoged){
-                val medicalWorker = MedicalWorker(name!!,surname!!,hospital!!,pin)
-                intent = Intent(this,MainActivity::class.java)
-                intent.putExtra(Konstants.MED_PERSON,medicalWorker)
-            }
-            else{
-                intent = Intent(this,LoginActivity::class.java)
-            }
-            startActivity(intent)
-            finish()
+        lateinit var intent: Intent
+        if(isLoged){
+            val medicalWorker = MedicalWorker(name!!,surname!!,hospital!!,pin)
+            intent = Intent(this,MainActivity::class.java)
+            intent.putExtra(Konstants.MED_PERSON,medicalWorker)
 
-        },3000)
+        }
+        else{
+            intent = Intent(this,LoginActivity::class.java)
+
+        }
+        startActivity(intent)
+        finish()
+
     }
 }

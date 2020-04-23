@@ -2,14 +2,16 @@ package com.example.poject1.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.poject1.R
 import com.example.poject1.model.Patient
+import com.example.poject1.ui.diff.PatientDiffCallBack
 import com.example.poject1.ui.viewholder.ReleasedViewHolder
 
 class ReleasedAdapter : RecyclerView.Adapter<ReleasedViewHolder>() {
 
-    private var releasedPatientsList:List<Patient> = ArrayList<Patient>()
+    private var releasedPatientsList =  mutableListOf<Patient>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReleasedViewHolder {
         return ReleasedViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.released_item,parent,false))
@@ -24,7 +26,11 @@ class ReleasedAdapter : RecyclerView.Adapter<ReleasedViewHolder>() {
     }
 
     fun setReleasedPatientsList(newList: List<Patient>){
-        this.releasedPatientsList = newList
-        notifyDataSetChanged()
+
+        val diffCallBack = PatientDiffCallBack(releasedPatientsList,newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallBack)
+        releasedPatientsList.clear()
+        releasedPatientsList.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
     }
 }

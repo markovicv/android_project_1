@@ -59,6 +59,8 @@ class EditProfileActivity : AppCompatActivity() {
             editor.putString(Konstants.EDITOR_HOSPITAL,medicalWorker.hospital)
             editor.apply()
 
+
+
             val intent = Intent(this,MainActivity::class.java)
             intent.putExtra(Konstants.MED_PERSON,medicalWorker)
             startActivity(intent)

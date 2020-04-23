@@ -13,7 +13,8 @@
         <activity android:name=".ui.activities.MainActivity"/>
         <activity android:name=".ui.activities.EditProfileActivity"/>
         <activity android:name=".ui.activities.PatientActivity"/>
-        <activity android:name=".ui.activities.SplashScreenActivity">
+        <activity android:name=".ui.activities.SplashScreenActivity"
+            android:theme="@style/Splashtheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
