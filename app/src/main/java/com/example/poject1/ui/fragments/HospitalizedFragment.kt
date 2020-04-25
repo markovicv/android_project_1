@@ -11,19 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.poject1.Konstants
 import com.example.poject1.R
-import com.example.poject1.listeners.OnRecordBtnClick
-import com.example.poject1.listeners.OnReleaseBtnClick
-import com.example.poject1.model.MedicalWorker
 import com.example.poject1.model.Patient
 import com.example.poject1.ui.activities.PatientActivity
 import com.example.poject1.ui.adapter.HospitalizedAdapter
 import com.example.poject1.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.fragment_hospitalized.*
-import kotlinx.android.synthetic.main.fragment_waiting_room.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class HospitalizedFragment : Fragment(R.layout.fragment_hospitalized),OnReleaseBtnClick,OnRecordBtnClick{
+class HospitalizedFragment : Fragment(R.layout.fragment_hospitalized){
 
     private val sharedMainViewModel: MainViewModel by activityViewModels()
 
@@ -36,7 +32,18 @@ class HospitalizedFragment : Fragment(R.layout.fragment_hospitalized),OnReleaseB
 
 
         hospitalizedRv.layoutManager = LinearLayoutManager(activity)
-        val hospitalizedAdapter = HospitalizedAdapter(this,this)
+        val hospitalizedAdapter = HospitalizedAdapter({
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            val formatted = current.format(formatter)
+            it.released = formatted
+            sharedMainViewModel.addPatientsToReleased(it)
+        },{
+            val intent = Intent(activity,PatientActivity::class.java)
+            intent.putExtra(Konstants.PATIENT_RECORD,it)
+            startActivityForResult(intent,Konstants.CHANGE_PATIENT_STATUS);
+
+        })
         hospitalizedRv.adapter = hospitalizedAdapter
 
         sharedMainViewModel.getHospitalizedPatients().observe(viewLifecycleOwner, Observer {
@@ -51,21 +58,7 @@ class HospitalizedFragment : Fragment(R.layout.fragment_hospitalized),OnReleaseB
         }
     }
 
-    override fun onReleaseBtnClick(patient: Patient) {
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        val formatted = current.format(formatter)
-        patient.released = formatted
-        sharedMainViewModel.addPatientsToReleased(patient)
-    }
 
-    override fun onRecordBtnClick(patient: Patient) {
-        val intent = Intent(activity,PatientActivity::class.java)
-        intent.putExtra(Konstants.PATIENT_RECORD,patient)
-        startActivityForResult(intent,Konstants.CHANGE_PATIENT_STATUS);
-
-
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

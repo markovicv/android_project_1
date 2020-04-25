@@ -26,8 +26,6 @@ class EditProfileActivity : AppCompatActivity() {
         hospitaleditET.setText(medicalWorker.hospital)
 
         editodustaniBtn.setOnClickListener {
-            val intent = Intent(this,ProfileFragment::class.java)
-            startActivity(intent)
             finish()
         }
         editIzmeniBtn.setOnClickListener {
@@ -59,22 +57,8 @@ class EditProfileActivity : AppCompatActivity() {
             editor.putString(Konstants.EDITOR_HOSPITAL,medicalWorker.hospital)
             editor.apply()
 
-
-
-            val intent = Intent(this,MainActivity::class.java)
-            intent.putExtra(Konstants.MED_PERSON,medicalWorker)
-            startActivity(intent)
             finish()
-//
-//            val fragment = ProfileFragment()
-//            val transaction = supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.edit_pa,fragment)
-//            transaction.addToBackStack(null);
-//            transaction.commit()
-//            finish()
 
-//            val supportFragmentManager  = supportFragmentManager
-//            val fragment = ProfileFragment()
 
 
         }

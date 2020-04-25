@@ -1,23 +1,29 @@
 package com.example.poject1.ui.adapter
 
-import android.text.method.TextKeyListener.clear
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.poject1.R
-import com.example.poject1.listeners.OnHealthyBtnClick
-import com.example.poject1.listeners.OnHospitlaizedBtnClick
 import com.example.poject1.model.Patient
 import com.example.poject1.ui.diff.PatientDiffCallBack
 import com.example.poject1.ui.viewholder.WaitingRoomViewHolder
-import java.util.Collections.addAll
 
-class WaitingRoomAdapter(val onHealthyBtnClick: OnHealthyBtnClick,val onHospitlaizedBtnClick: OnHospitlaizedBtnClick) : RecyclerView.Adapter<WaitingRoomViewHolder>() {
+class WaitingRoomAdapter(private val onBtnHealthyClicked: (Patient) -> Unit,
+                         private val onBtnHospitalisationClicked: (Patient) -> Unit) : RecyclerView.Adapter<WaitingRoomViewHolder>() {
     private val waitingRoomPatientsList = mutableListOf<Patient>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WaitingRoomViewHolder {
-        return WaitingRoomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.waiting_item,parent,false))
+      //  return WaitingRoomViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.waiting_item,parent,false))
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val containerView = layoutInflater.inflate(R.layout.waiting_item,parent,false)
+        return WaitingRoomViewHolder(containerView,{
+            val patient = waitingRoomPatientsList.get(it)
+            onBtnHealthyClicked.invoke(patient)
+        },{
+            val patient = waitingRoomPatientsList.get(it)
+            onBtnHospitalisationClicked.invoke(patient)
+        })
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +31,7 @@ class WaitingRoomAdapter(val onHealthyBtnClick: OnHealthyBtnClick,val onHospitla
     }
 
     override fun onBindViewHolder(holder: WaitingRoomViewHolder, position: Int) {
-        holder.bind(waitingRoomPatientsList.get(position),onHealthyBtnClick,onHospitlaizedBtnClick)
+        holder.bind(waitingRoomPatientsList.get(position))
 
     }
 
