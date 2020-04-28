@@ -20,10 +20,13 @@ class EditProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
 
-        val medicalWorker = intent.getParcelableExtra(Konstants.MED_PERSON) as MedicalWorker
-        nameeditET.setText(medicalWorker.name)
-        surnameditET.setText(medicalWorker.surname)
-        hospitaleditET.setText(medicalWorker.hospital)
+       // val medicalWorker = intent.getParcelableExtra(Konstants.MED_PERSON) as MedicalWorker
+
+        val sharedPreferences = getSharedPreferences(Konstants.MEDICAL_PREFERENCE,Context.MODE_PRIVATE)
+
+        nameeditET.setText(sharedPreferences?.getString(Konstants.EDITOR_NAME,""))
+        surnameditET.setText(sharedPreferences?.getString(Konstants.EDITOR_SURNAME,""))
+        hospitaleditET.setText(sharedPreferences?.getString(Konstants.EDITOR_HOSPITAL,""))
 
         editodustaniBtn.setOnClickListener {
             finish()
@@ -34,28 +37,28 @@ class EditProfileActivity : AppCompatActivity() {
             val newSurname = surnameditET.text.toString()
             val newHospital = hospitaleditET.text.toString()
 
-            if(newName == ""){
+            if(newName.isEmpty()){
                 nameeditET.setError(this.resources.getString(R.string.IME_LOSE_UNESENO))
                 return@setOnClickListener
             }
-            if(newSurname == ""){
+            if(newSurname.isEmpty()){
                 surnameditET.setError(this.resources.getString(R.string.PREZIME_LOSE_UNESENO))
                 return@setOnClickListener
 
             }
-            if(newHospital==""){
+            if(newHospital.isEmpty()){
                 hospitaleditET.setError(this.resources.getString(R.string.BOLNICA_LOSE_UNESENO))
                 return@setOnClickListener
             }
-            medicalWorker.name = newName
-            medicalWorker.surname = newSurname
-            medicalWorker.hospital = newHospital
+//            medicalWorker.name = newName
+//            medicalWorker.surname = newSurname
+//            medicalWorker.hospital = newHospital
 
             val editor = getSharedPreferences(Konstants.MEDICAL_PREFERENCE, Context.MODE_PRIVATE).edit()
-            editor.putString(Konstants.EDITOR_NAME,medicalWorker.name)
-            editor.putString(Konstants.EDITOR_SURNAME,medicalWorker.surname)
-            editor.putString(Konstants.EDITOR_HOSPITAL,medicalWorker.hospital)
-            editor.apply()
+            editor.putString(Konstants.EDITOR_NAME,newName)
+            editor.putString(Konstants.EDITOR_SURNAME,newSurname)
+            editor.putString(Konstants.EDITOR_HOSPITAL,newHospital)
+            editor.commit()
 
             finish()
 

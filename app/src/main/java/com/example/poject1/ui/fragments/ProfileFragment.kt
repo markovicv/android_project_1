@@ -24,10 +24,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val medicalWorker = activity?.intent?.getParcelableExtra(Konstants.MED_PERSON) as MedicalWorker
-        medWorkerNameTv.text = medicalWorker.name
-        medWorkerSurnameTv.text = medicalWorker.surname
-        medworkerJobTv.text = medicalWorker.hospital
+        val sharedPreferences = activity?.getSharedPreferences(Konstants.MEDICAL_PREFERENCE,Context.MODE_PRIVATE)
+
+
+        //val medicalWorker = activity?.intent?.getParcelableExtra(Konstants.MED_PERSON) as MedicalWorker
+        medWorkerNameTv.text = sharedPreferences?.getString(Konstants.EDITOR_NAME,"")
+        medWorkerSurnameTv.text =sharedPreferences?.getString(Konstants.EDITOR_SURNAME,"")
+        medworkerJobTv.text = sharedPreferences?.getString(Konstants.EDITOR_HOSPITAL,"")
 
 
 
@@ -39,8 +42,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             startActivity(intent)
         }
         izmeniMedBtn.setOnClickListener {
-            val intent = Intent(activity,EditProfileActivity::class.java)
-            intent.putExtra(Konstants.MED_PERSON,medicalWorker)
+            val intent = Intent(context,EditProfileActivity::class.java)
+            //intent.putExtra(Konstants.MED_PERSON,medicalWorker)
             startActivity(intent)
         }
 

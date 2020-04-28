@@ -124,12 +124,17 @@ class MainViewModel :ViewModel(){
     fun updateRecord(patient: Patient){
         for(i in 0 until hsopitalizedPatientsList.size){
             if(hsopitalizedPatientsList.get(i).id == patient.id){
-                hsopitalizedPatientsList.removeAt(i)
-                hsopitalizedPatientsList.add(i,patient)
+                hsopitalizedPatientsList.get(i).name = patient.name
+                hsopitalizedPatientsList.get(i).surname = patient.surname
+                hsopitalizedPatientsList.get(i).arrivedSimptoms = patient.arrivedSimptoms
+                hsopitalizedPatientsList.get(i).currentState = patient.currentState
+                break
             }
         }
+        val listToSubmit = mutableListOf<Patient>()
+        listToSubmit.addAll(hsopitalizedPatientsList)
 
-        hospitalizedPatients.value = hsopitalizedPatientsList
+        hospitalizedPatients.value = listToSubmit
     }
 
 

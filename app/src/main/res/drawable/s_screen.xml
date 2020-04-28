@@ -4,6 +4,4 @@
     <item android:drawable="@android:color/holo_blue_bright"/>
     <item android:drawable="@drawable/ic_local_hospital_black_24dp" android:gravity="center"/>
 
-
-
 </layer-list>
